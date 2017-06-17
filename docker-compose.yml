@@ -16,7 +16,7 @@ services:
     container_name: gitlab
     restart: always
     environment:
-      - VIRTUAL_HOST=gitlab.example.com
+      - VIRTUAL_HOST=gitlab.waghetti.com
       - VIRTUAL_PORT=80
       #GITLAB_OMNIBUS_CONFIG: |
         # external_url 'https://gitlab.example.com'
