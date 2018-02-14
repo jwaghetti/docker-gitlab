@@ -12,19 +12,24 @@ volumes:
 
 services:
   gitlab:
-    image: gitlab/gitlab-ce:9.1.4-ce.0
+    image: gitlab/gitlab-ce:10.4.3-ce.0
     container_name: gitlab
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "10"
     environment:
-      - VIRTUAL_HOST=gitlab.waghetti.com
+      GITLAB_OMNIBUS_CONFIG: |
+         external_url 'https://gitlab.example.com'
+    environment:
+      - VIRTUAL_HOST=gitlab.example.com
       - VIRTUAL_PORT=80
-      #GITLAB_OMNIBUS_CONFIG: |
-        # external_url 'https://gitlab.example.com'
-        # Add any other gitlab.rb configuration here, each on its own line
     ports:
       - "80"
       - "443"
-      - "22"
+      - "1000:22"
     volumes:
       - gitlab-config:/etc/gitlab
       - gitlab-logs:/var/log/gitlab
